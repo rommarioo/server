@@ -3,7 +3,7 @@ import cors from "cors";
 import { URLSearchParams } from "url";
 import dotenv from "dotenv";
 import helmet from "helmet";
-import os, { networkInterfaces } from "os";
+import os from "os";
 
 const app = express();
 const customCors = {
