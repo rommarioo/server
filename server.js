@@ -19,7 +19,7 @@ const customCors = {
 
 app.use(helmet());
 app.use(express.json());
-// app.use(cors(customCors));
+app.use(cors(customCors));
 dotenv.config();
 app.use(express.urlencoded({ extended: false }));
 
