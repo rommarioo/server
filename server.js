@@ -3,6 +3,7 @@ import cors from "cors";
 import { URLSearchParams } from "url";
 import dotenv from "dotenv";
 import helmet from "helmet";
+import os, { networkInterfaces } from "os";
 
 const app = express();
 const customCors = {
@@ -15,6 +16,7 @@ const customCors = {
     }
   },
 };
+
 app.use(helmet());
 app.use(express.json());
 app.use(cors(customCors));
@@ -63,8 +65,28 @@ app.post("/", async (req, res) => {
   res.send("success");
 });
 
+function getIPAddress() {
+  let interfaces = os.networkInterfaces();
+  for (const devName in interfaces) {
+    const iface = interfaces[devName];
+
+    for (let i = 0; i < iface.length; i++) {
+      const alias = iface[i];
+      if (
+        alias.family === "IPv4" &&
+        alias.address !== "127.0.0.1" &&
+        !alias.internal
+      )
+        return alias.address;
+    }
+  }
+  return "0.0.0.0";
+}
+
+const address = getIPAddress();
+
 app.listen(process.env.PORT, () => {
   console.log(
-    `[server]: Server is running at http://localhost:${process.env.PORT}`
+    `[server]: Server is running at ${address} port ${process.env.PORT}`
   );
 });
