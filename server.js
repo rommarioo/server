@@ -43,7 +43,9 @@ async function postData(url = "", formdata) {
     console.log(error);
   }
 }
-
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 app.post("/", async (req, res) => {
   console.log(req.get("origin"));
   if (req.body === undefined) {
