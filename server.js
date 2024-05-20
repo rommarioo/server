@@ -43,16 +43,17 @@ async function postData(url = "", formdata) {
     console.log(error);
   }
 }
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+
 app.post("/", async (req, res) => {
+  const date = new Date();
   console.log(req.get("origin"));
   if (req.body === undefined) {
     res.send("error");
   } else {
     const data = req.body;
     const formdata = new URLSearchParams();
+    formdata.append("Date", date.toLocaleDateString());
+    formdata.append("Time", date.toLocaleTimeString());
     formdata.append("Email", data.Email);
     formdata.append("Name", data.Name);
     formdata.append("Phone", data.Phone);
