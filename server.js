@@ -43,7 +43,10 @@ async function postData(url = "", formdata) {
     console.log(error);
   }
 }
-
+app.get("/", (req, res) => {
+  const date = new Date();
+  res.send(date.toLocaleDateString("ru-RU"));
+});
 app.post("/", async (req, res) => {
   const date = new Date();
   console.log(req.get("origin"));
