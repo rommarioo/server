@@ -43,10 +43,10 @@ async function postData(url = "", formdata) {
     console.log(error);
   }
 }
-app.get("/", (req, res) => {
-  const date = new Date();
-  res.send(date.toLocaleDateString("ru-RU"));
-});
+// app.get("/", (req, res) => {
+//   const date = new Date();
+//   res.send(date.toLocaleDateString("ru-RU"));
+// });
 app.post("/", async (req, res) => {
   const date = new Date();
   console.log(req.get("origin"));
@@ -55,7 +55,7 @@ app.post("/", async (req, res) => {
   } else {
     const data = req.body;
     const formdata = new URLSearchParams();
-    formdata.append("Date", date.toLocaleDateString());
+    formdata.append("Date", date.toLocaleDateString("ru-RU"));
     formdata.append("Time", date.toLocaleTimeString());
     formdata.append("Email", data.Email);
     formdata.append("Name", data.Name);
